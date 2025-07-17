@@ -1,0 +1,46 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+header {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.form-control, .form-select {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.alert-info, .alert-danger {
+    border-radius: 5px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

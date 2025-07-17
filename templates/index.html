@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Customer Churn Prediction</h1>
+        <p>Predict whether a telecom customer will churn using machine learning</p>
+    </header>
+
+    <div class="container my-5">
+        <!-- Project Description -->
+        <section class="mb-5">
+            <h2>About the Project</h2>
+            <p>This web application predicts customer churn for a telecom company using a Random Forest model trained on the Telco Customer Churn dataset. The model achieves ~80% accuracy and ~0.85 ROC-AUC, leveraging features like tenure, contract type, and monthly charges. Use the form below to input customer data and get a churn prediction.</p>
+        </section>
+
+        <!-- Input Format -->
+        <section class="mb-5">
+            <h2>Input Format</h2>
+            <ul>
+                <li><strong>Gender</strong>: Male or Female.</li>
+                <li><strong>Tenure</strong>: Months the customer has been with the company (0–72).</li>
+                <li><strong>Monthly Charges</strong>: Monthly bill amount ($0–150).</li>
+                <li><strong>Contract</strong>: Month-to-month, One year, or Two year.</li>
+                <li><strong>Internet Service</strong>: DSL, Fiber optic, or No.</li>
+                <li><strong>Payment Method</strong>: Electronic check, Mailed check, Bank transfer, Credit card.</li>
+                <li><strong>Senior Citizen</strong>: Yes (1) or No (0).</li>
+                <li><strong>Partner, Dependents, Phone Service, etc.</strong>: Yes or No (or No internet/phone service where applicable).</li>
+            </ul>
+        </section>
+
+        <!-- Prediction Form -->
+        <section class="mb-5">
+            <h2>Predict Churn</h2>
+            <form id="churnForm" method="POST" class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select" id="gender" name="gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="tenure" class="form-label">Tenure (months)</label>
+                        <input type="number" class="form-control" id="tenure" name="tenure" min="0" max="72" value="12" required>
+                        <div class="invalid-feedback">Please enter a number between 0 and 72.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="monthly_charges" class="form-label">Monthly Charges ($)</label>
+                        <input type="number" class="form-control" id="monthly_charges" name="monthly_charges" min="0" max="150" step="0.01" value="50.0" required>
+                        <div class="invalid-feedback">Please enter a number between 0 and 150.</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="contract" class="form-label">Contract</label>
+                        <select class="form-select" id="contract" name="contract" required>
+                            <option value="Month-to-month">Month-to-month</option>
+                            <option value="One year">One year</option>
+                            <option value="Two year">Two year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="internet_service" class="form-label">Internet Service</label>
+                        <select class="form-select" id="internet_service" name="internet_service" required>
+                            <option value="DSL">DSL</option>
+                            <option value="Fiber optic">Fiber optic</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select class="form-select" id="payment_method" name="payment_method" required>
+                            <option value="Electronic check">Electronic check</option>
+                            <option value="Mailed check">Mailed check</option>
+                            <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+                            <option value="Credit card (automatic)">Credit card (automatic)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="senior_citizen" class="form-label">Senior Citizen</label>
+                        <select class="form-select" id="senior_citizen" name="senior_citizen" required>
+                            <option value="0">No (0)</option>
+                            <option value="1">Yes (1)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="partner" class="form-label">Partner</label>
+                        <select class="form-select" id="partner" name="partner" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="dependents" class="form-label">Dependents</label>
+                        <select class="form-select" id="dependents" name="dependents" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="phone_service" class="form-label">Phone Service</label>
+                        <select class="form-select" id="phone_service" name="phone_service" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="multiple_lines" class="form-label">Multiple Lines</label>
+                        <select class="form-select" id="multiple_lines" name="multiple_lines" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No phone service">No phone service</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="online_security" class="form-label">Online Security</label>
+                        <select class="form-select" id="online_security" name="online_security" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="online_backup" class="form-label">Online Backup</label>
+                        <select class="form-select" id="online_backup" name="online_backup" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="device_protection" class="form-label">Device Protection</label>
+                        <select class="form-select" id="device_protection" name="device_protection" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="tech_support" class="form-label">Tech Support</label>
+                        <select class="form-select" id="tech_support" name="tech_support" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="streaming_tv" class="form-label">Streaming TV</label>
+                        <select class="form-select" id="streaming_tv" name="streaming_tv" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="streaming_movies" class="form-label">Streaming Movies</label>
+                        <select class="form-select" id="streaming_movies" name="streaming_movies" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">No internet service</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="paperless_billing" class="form-label">Paperless Billing</label>
+                        <select class="form-select" id="paperless_billing" name="paperless_billing" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict Churn</button>
+            </form>
+
+            <!-- Display Results -->
+            {% if prediction %}
+            <div class="mt-4 alert alert-info">
+                <h4>Prediction Result</h4>
+                <p><strong>Churn Prediction:</strong> {{ prediction }}</p>
+                <p><strong>Probability of Churn:</strong> {{ "%.2f" % probability }}%</p>
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="mt-4 alert alert-danger">
+                <p><strong>Error:</strong> {{ error }}</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Output Format -->
+        <section class="mb-5">
+            <h2>Output Format</h2>
+            <p>The model returns:</p>
+            <ul>
+                <li><strong>Churn Prediction</strong>: "Yes" (customer will churn) or "No" (customer will not churn).</li>
+                <li><strong>Probability of Churn</strong>: Percentage likelihood of churn (0–100%).</li>
+            </ul>
+        </section>
+
+        <!-- Model Details -->
+        <section class="mb-5">
+            <h2>Model Details</h2>
+            <p>The model is a Random Forest classifier with SMOTE for handling class imbalance, achieving:</p>
+            <ul>
+                <li><strong>Accuracy</strong>: ~80% (correct predictions on test data).</li>
+                <li><strong>ROC-AUC</strong>: ~0.85 (good at distinguishing churners).</li>
+            </ul>
+            <p>Key features influencing churn include contract type, tenure, and monthly charges. Month-to-month contracts have a 42.7% churn rate, while two-year contracts have a 2.8% churn rate.</p>
+        </section>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>© 2025 Customer Churn Prediction. Built with Flask and Python.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
