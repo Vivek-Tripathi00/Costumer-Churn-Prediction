@@ -50,35 +50,19 @@
 
 </div>
 
-## 🖥️ Screenshots
+## 🖥️ Interactive Dashboard Preview
 
-<div align="center" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
-
-### Dataset Preview
-![Dataset Sample](https://via.placeholder.com/500x300/4a6baf/ffffff?text=Dataset+Preview+with+Customer+Features)
-
-### Input Form
-![Input Form](https://via.placeholder.com/500x300/4a6baf/ffffff?text=User+Input+Form+with+All+Fields)
-
-### Prediction Result
-![Prediction Output](https://via.placeholder.com/500x300/4a6baf/ffffff?text=Prediction+Result+with+Probability)
-
-### Model Performance
-![Confusion Matrix](https://via.placeholder.com/500x300/4a6baf/ffffff?text=Confusion+Matrix+and+Metrics)
-
+<div align="center">
+<img src="img1.jpg" alt="Main Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #4a6baf;">
 </div>
 
-## 🛠️ Technical Stack
+## 📊 Data Visualization
 
-### Core Architecture
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin: 40px 0;">
 
-graph TD
-    A[User Interface] --> B[Flask Server]
-    B --> C[Pre-trained Model]
-    C --> D[Prediction Engine]
-    D --> E[Result Visualization]
-    B --> F[Database]
-  pie
+### Feature Importance
+```mermaid
+pie showLegend
     title Top Predictive Features
     "Contract Type" : 25
     "Monthly Charges" : 20
@@ -86,81 +70,47 @@ graph TD
     "Internet Service" : 15
     "Payment Method" : 12
     "Other Features" : 10
-  Performance Metrics
-Metric	Score	Interpretation
-Accuracy	0.85	Correct predictions 85% of time
-Precision	0.82	Low false positive rate
-Recall	0.78	Captures 78% of churn cases
-ROC AUC	0.89	Excellent class discrimination
-F1 Score	0.80	Balance between precision and recall
-🚀 Quick Start
-Prerequisites
-Python 3.8+
-
-pip package manager
-
-Git (optional)
-
-Installation
+barChart
+    title Model Evaluation Metrics
+    xAxis Metric
+    yAxis Score
+    series "Value"
+    "Accuracy" : 85
+    "Precision" : 82
+    "Recall" : 78
+    "ROC AUC" : 89
+    "F1 Score" : 80
 # Clone repository
 git clone https://github.com/yourusername/churn-prediction-app.git
 cd churn-prediction-app
 
-# Create virtual environment
+# Set up virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate    # Windows
+.\venv\Scripts\activate  # Windows
 
 # Install dependencies
 pip install -r requirements.txt
 
+# Required packages (for requirements.txt)
+Flask==2.0.1
+scikit-learn==0.24.2
+pandas==1.2.4
+numpy==1.20.1
+
 # Run the application
-python app.pyAccess the application at: http://localhost:5000
+python app.py
 
-📊 Dataset Information
-The model was trained on a telecom customer dataset containing:
 
-10,000+ records of customer behavior
-
-21 predictive features including:
-
-Demographic information
-
-Account details
-
-Services subscribed
-
-Payment history
-
-Balanced dataset (60% non-churn, 40% churn)
-
-📚 Model Details
-Training Process
-Data cleaning and preprocessing
-
-Feature engineering
-
-Model selection (XGBoost outperformed others)
-
-Hyperparameter tuning
-
-Validation and testing
-
-Model Interpretation
-https://via.placeholder.com/600x400/4a6baf/ffffff?text=SHAP+Feature+Importance+Plot
-
-🤝 Contributing
-We welcome contributions! Please follow these steps:
-
-Fork the project
-
-Create your feature branch (git checkout -b feature/AmazingFeature)
-
-Commit your changes (git commit -m 'Add some AmazingFeature')
-
-Push to the branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-📜 License
-Distributed under the MIT License. See LICENSE for more information.
+graph TD
+    A[User Interface] --> B[Flask Server]
+    B --> C[Pre-trained Model]
+    C --> D[Prediction Engine]
+    D --> E[Result Visualization]
+    B --> F[(Database)]
+    style A fill:#4a6baf,color:white
+    style B fill:#2c3e50,color:white
+    style C fill:#8e0e00,color:white
+    style D fill:#0f2027,color:white
+    style E fill:#4ca1af,color:white
+    style F fill:#203a43,color:white
