@@ -53,7 +53,7 @@
 ## 🖥️ Interactive Dashboard Preview
 
 <div align="center">
-<img src="img1.png" alt="Main Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #4a6baf;">
+<img src="img2.png" alt="Main Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #4a6baf;">
 </div>
 
 ## 📊 Data Visualization
