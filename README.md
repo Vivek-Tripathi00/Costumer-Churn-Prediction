@@ -60,57 +60,9 @@
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin: 40px 0;">
 
-### Feature Importance
-```mermaid
-pie showLegend
-    title Top Predictive Features
-    "Contract Type" : 25
-    "Monthly Charges" : 20
-    "Tenure (Months)" : 18
-    "Internet Service" : 15
-    "Payment Method" : 12
-    "Other Features" : 10
-barChart
-    title Model Evaluation Metrics
-    xAxis Metric
-    yAxis Score
-    series "Value"
-    "Accuracy" : 85
-    "Precision" : 82
-    "Recall" : 78
-    "ROC AUC" : 89
-    "F1 Score" : 80
-# Clone repository
-git clone https://github.com/yourusername/churn-prediction-app.git
-cd churn-prediction-app
-
-# Set up virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Required packages (for requirements.txt)
-Flask==2.0.1
-scikit-learn==0.24.2
-pandas==1.2.4
-numpy==1.20.1
-
-# Run the application
-python app.py
-
-
-graph TD
-    A[User Interface] --> B[Flask Server]
-    B --> C[Pre-trained Model]
-    C --> D[Prediction Engine]
-    D --> E[Result Visualization]
-    B --> F[(Database)]
-    style A fill:#4a6baf,color:white
-    style B fill:#2c3e50,color:white
-    style C fill:#8e0e00,color:white
-    style D fill:#0f2027,color:white
-    style E fill:#4ca1af,color:white
-    style F fill:#203a43,color:white
+<div align="center">
+<img src="img3.png" alt="Main Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #4a6baf;">
+</div>
+<div align="center">
+<img src="img4.png" alt="Main Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #4a6baf;">
+</div>
